@@ -439,7 +439,7 @@ static bool filter_and_set_cpus(char *path, bool am_initialized)
 	}
 	oldv = *lastslash;
 	*lastslash = '\0';
-	fpath = must_make_path(path, "cpuset.cpus", NULL);
+	fpath = must_make_path(path, CPUSET_PREFIX_STR "cpus", NULL);
 	posscpus = read_file(fpath);
 	if (!posscpus) {
 		SYSERROR("Could not read file: %s.\n", fpath);
@@ -533,7 +533,7 @@ static bool filter_and_set_cpus(char *path, bool am_initialized)
 
 copy_parent:
 	*lastslash = oldv;
-	fpath = must_make_path(path, "cpuset.cpus", NULL);
+	fpath = must_make_path(path, CPUSET_PREFIX_STR "cpus", NULL);
 	ret = lxc_write_to_file(fpath, cpulist, strlen(cpulist), false);
 	if (ret < 0) {
 		SYSERROR("Could not write cpu list to: %s.\n", fpath);
@@ -652,7 +652,7 @@ static bool handle_cpuset_hierarchy(struct hierarchy *h, char *cgname)
 	}
 
 	/* copy parent's settings */
-	if (!copy_parent_file(cgpath, "cpuset.mems")) {
+	if (!copy_parent_file(cgpath, CPUSET_PREFIX_STR "mems")) {
 		SYSERROR("Failed to copy \"cpuset.mems\" settings.");
 		free(cgpath);
 		free(clonechildrenpath);

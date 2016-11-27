@@ -2303,8 +2303,8 @@ static bool init_cpuset_if_needed(struct cgroup_mount_point *mp,
 	if (!mp->need_cpuset_init)
 		return true;
 
-	return (do_init_cpuset_file(mp, path, "/cpuset.cpus") &&
-		do_init_cpuset_file(mp, path, "/cpuset.mems") );
+	return (do_init_cpuset_file(mp, path, "/" CPUSET_PREFIX_STR "cpus") &&
+		do_init_cpuset_file(mp, path, "/" CPUSET_PREFIX_STR "mems") );
 }
 
 static void print_cgfs_init_debuginfo(struct cgfs_data *d)

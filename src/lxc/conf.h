@@ -455,3 +455,10 @@ extern void suggest_default_idmap(void);
 FILE *make_anonymous_mount_file(struct lxc_list *mount);
 struct lxc_list *sort_cgroup_settings(struct lxc_list* cgroup_settings);
 #endif
+
+#ifdef CPUSET_NO_PREFIX
+#define CPUSET_PREFIX_STR ""
+#else
+#define CPUSET_PREFIX_STR "cpuset."
+#endif
+
